@@ -27,6 +27,8 @@ def weather(bot, update):
     weather_api = WeatherAPI()
     weather_text = weather_api.get_weather()
     bot.sendMessage(chat_id=update.message.chat_id, text=weather_text)
+    suggest_text = weather_api.get_suggestion()
+    bot.sendMessage(chat_id=update.message.chat_id, text=suggest_text)
 
 
 echo_handler = MessageHandler(Filters.text, echo)

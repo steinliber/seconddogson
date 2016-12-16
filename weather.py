@@ -47,18 +47,26 @@ weather_map = {
     '38': '\U0001F525'
 }
 
+suggest_map = {
+    'dressing': '\U0001F455',
+    'car_washing': '\U0001F69C',
+    'travel': '\U0001F682',
+    'sport': '\U0001F3C3',
+    'flu': '\U0001F637',
+    'uv': '\U0001F60E',
+}
 
 class WeatherAPI():
     def __init__(self, location=LOCATION):
         self.location = location
 
     def get_weather(self, start=0, days=5):
-        weather_text = '广州' + ', ' + '中国: \n'
         params = {
             'key': WEATHER_ACCESS_TOKEN, 'location': self.location, 'language': LANGUAGE,
             'unit': UNIT, 'start': start, 'days': days}
-        data = requests.get(WEATHER_URL, params=params)
-        return_data = data.json()['results'][0]['daily']
+        data = requests.get(WEATHER_URL, params=params).json()['results'][0]
+        return_data = data['daily']
+        weather_text = '{}\n'.format(data['location']['path'])
         for weather in return_data:
             date = weather['date'].split('-')
             date_text = date[1] + '月' + date[2] + '日'
@@ -70,8 +78,23 @@ class WeatherAPI():
     def get_suggestion(self):
         params = {
             'key': WEATHER_ACCESS_TOKEN, 'location': self.location, 'language': LANGUAGE}
-        data = requests.get(SUGGEST_URL, params=params)
-        print(data.json()['results'][0]['suggestion'])
+        data = requests.get(SUGGEST_URL, params=params).json()['results'][0]['suggestion']
+        suggest_text = '穿衣指数 {}:  {}'.format(self._get_suggest_emoji('dressing'),
+                                             data['dressing']['brief']) + '\n'
+        suggest_text += '洗车指数 {}:  {}'.format(self._get_suggest_emoji('car_washing'),
+                                              data['car_washing']['brief']) + '\n'
+        suggest_text += '旅行适宜度 {}:  {}'.format(self._get_suggest_emoji('travel'),
+                                               data['travel']['brief']) + '\n'
+        suggest_text += '运动适宜度 {}:  {}'.format(self._get_suggest_emoji('sport'),
+                                               data['sport']['brief']) + '\n'
+        suggest_text += '易感指数 {}:  {}'.format(self._get_suggest_emoji('flu'),
+                                              data['flu']['brief']) + '\n'
+        suggest_text += '紫外线等级 {}:  {}'.format(self._get_suggest_emoji('uv'),
+                                               data['uv']['brief'])
+        return suggest_text
 
     def _get_emoji(self, weather_id):
         return weather_map.get(weather_id, u'\U0001F300')
+
+    def _get_suggest_emoji(self, type):
+        return suggest_map.get(type, '\U0001F601')
