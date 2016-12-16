@@ -53,17 +53,18 @@ class WeatherAPI():
         self.location = location
 
     def get_weather(self, start=0, days=5):
-        weather_text = self.location + ', ' + 'China: \n'
+        weather_text = '广州' + ', ' + '中国: \n'
         params = {
             'key': WEATHER_ACCESS_TOKEN, 'location': self.location, 'language': LANGUAGE,
             'unit': UNIT, 'start': start, 'days': days}
         data = requests.get(WEATHER_URL, params=params)
         return_data = data.json()['results'][0]['daily']
         for weather in return_data:
-            weather_len = len(weather['date'])
-            weather_text += weather['date'] + ' -> ' + '白天: ' + weather['text_day'] + self._get_emoji(weather['code_day']) + '  晚上: ' + weather['text_night'] + self._get_emoji(weather['code_night']) + '\n'
-            weather_text += ' ' * weather_len + '    ' + '最高温度: ' + weather['high'] + degree_sign + 'C  -  ' + '最低温度: ' + weather['low'] + degree_sign + 'C\n'
-            weather_text += ' ' * weather_len + '    ' + '风力: ' + weather['wind_scale'] + '  风速: ' + weather['wind_speed'] + 'km/h\n'
+            date = weather['date'].split('-')
+            date_text = date[1] + '月' + date[2] + '日'
+            weather_text += date_text + ' ->->' + '\n' + '白天: ' + weather['text_day'] + self._get_emoji(weather['code_day']) + '  晚上: ' + weather['text_night'] + self._get_emoji(weather['code_night']) + '\n'
+            weather_text += '最高温度: ' + weather['high'] + degree_sign + 'C - ' + '最低温度: ' + weather['low'] + degree_sign + 'C\n'
+            weather_text += '风力: ' + weather['wind_scale'] + '  风速: ' + weather['wind_speed'] + 'km/h\n' + '========' + '\n' 
         return weather_text
 
     def get_suggestion(self):
