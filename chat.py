@@ -7,7 +7,7 @@ deepThought = ChatBot("deepThought", logic_adapters=[
         {
             'import_path': 'chatterbot.logic.LowConfidenceAdapter',
             'threshold': 0.65,
-            'default_response': 'NO!'
+            'default_response': '全然不懂你在说什么'
         }
     ],)
 deepThought.set_trainer(ChatterBotCorpusTrainer)

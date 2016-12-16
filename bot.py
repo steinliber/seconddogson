@@ -7,7 +7,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 def echo(bot, update):
     return_msg = str(deepThought.get_response(update.message.text))
-    if return_msg == 'NO!':
+    if return_msg == '全然不懂你在说什么':
         bot.sendPhoto(chat_id=update.message.chat_id, photo=open('static/cat.jpg', 'rb'))
     bot.sendMessage(chat_id=update.message.chat_id, text=return_msg)
 
