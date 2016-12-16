@@ -79,9 +79,9 @@ class WeatherAPI():
         params = {
             'key': WEATHER_ACCESS_TOKEN, 'location': self.location, 'language': LANGUAGE}
         data = requests.get(SUGGEST_URL, params=params).json()['results'][0]['suggestion']
-        suggest_text = '生活指数:\n'
+        suggest_text = '生活指数:\n <==========>\n'
         suggest_text += '穿衣指数 {}:  {}'.format(self._get_suggest_emoji('dressing'),
-                                             data['dressing']['brief']) + '\n'
+                                              data['dressing']['brief']) + '\n'
         suggest_text += '洗车指数 {}:  {}'.format(self._get_suggest_emoji('car_washing'),
                                               data['car_washing']['brief']) + '\n'
         suggest_text += '旅行适宜度 {}:  {}'.format(self._get_suggest_emoji('travel'),
@@ -95,7 +95,7 @@ class WeatherAPI():
         return suggest_text
 
     def _get_emoji(self, weather_id):
-        return weather_map.get(weather_id, u'\U0001F300')
+        return weather_map.get(weather_id, '\U0001F300')
 
     def _get_suggest_emoji(self, type):
         return suggest_map.get(type, '\U0001F601')
