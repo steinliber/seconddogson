@@ -1,0 +1,36 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BOT_TOKEN	settings.py	/^BOT_TOKEN='318248420:AAHgJyTmE7FUJQdxbGnd2ERoDdg6IVfjyy4'$/;"	kind:variable	line:2
+ChatBot	chat.py	/^from chatterbot import ChatBot$/;"	kind:namespace	line:2
+ChatterBotCorpusTrainer	chat.py	/^from chatterbot.trainers import ChatterBotCorpusTrainer$/;"	kind:namespace	line:3
+LANGUAGE	settings.py	/^LANGUAGE = 'zh-Hans'$/;"	kind:variable	line:7
+LANGUAGE	weather.py	/^from settings import WEATHER_ACCESS_TOKEN, LOCATION, LANGUAGE, UNIT, WEATHER_URL, SUGGEST_URL$/;"	kind:namespace	line:2
+LOCATION	settings.py	/^LOCATION = 'guangzhou'$/;"	kind:variable	line:6
+LOCATION	weather.py	/^from settings import WEATHER_ACCESS_TOKEN, LOCATION, LANGUAGE, UNIT, WEATHER_URL, SUGGEST_URL$/;"	kind:namespace	line:2
+SUGGEST_URL	settings.py	/^SUGGEST_URL = 'https:\/\/api.thinkpage.cn\/v3\/life\/suggestion.json'/;"	kind:variable	line:10
+SUGGEST_URL	weather.py	/^from settings import WEATHER_ACCESS_TOKEN, LOCATION, LANGUAGE, UNIT, WEATHER_URL, SUGGEST_URL$/;"	kind:namespace	line:2
+UNIT	settings.py	/^UNIT = 'c'$/;"	kind:variable	line:8
+UNIT	weather.py	/^from settings import WEATHER_ACCESS_TOKEN, LOCATION, LANGUAGE, UNIT, WEATHER_URL, SUGGEST_URL$/;"	kind:namespace	line:2
+WEATHER_ACCESS_TOKEN	settings.py	/^WEATHER_ACCESS_TOKEN = 'o63pi3fj31pzivq7'$/;"	kind:variable	line:5
+WEATHER_ACCESS_TOKEN	weather.py	/^from settings import WEATHER_ACCESS_TOKEN, LOCATION, LANGUAGE, UNIT, WEATHER_URL, SUGGEST_URL$/;"	kind:namespace	line:2
+WEATHER_URL	settings.py	/^WEATHER_URL = 'https:\/\/api.thinkpage.cn\/v3\/weather\/daily.json'$/;"	kind:variable	line:9
+WEATHER_URL	weather.py	/^from settings import WEATHER_ACCESS_TOKEN, LOCATION, LANGUAGE, UNIT, WEATHER_URL, SUGGEST_URL$/;"	kind:namespace	line:2
+WeatherAPI	weather.py	/^class WeatherAPI():$/;"	kind:class	line:59
+__init__	weather.py	/^    def __init__(self, location=LOCATION):$/;"	kind:member	line:60
+_get_emoji	weather.py	/^    def _get_emoji(self, weather_id):$/;"	kind:member	line:97
+_get_suggest_emoji	weather.py	/^    def _get_suggest_emoji(self, type):$/;"	kind:member	line:100
+bot.py	bot.py	1;"	kind:file	line:1
+chat.py	chat.py	1;"	kind:file	line:1
+deepThought	chat.py	/^deepThought = ChatBot("deepThought", logic_adapters=[$/;"	kind:variable	line:4
+degree_sign	weather.py	/^degree_sign= u'\\N{DEGREE SIGN}'$/;"	kind:variable	line:17
+get_suggestion	weather.py	/^    def get_suggestion(self):$/;"	kind:member	line:78
+get_weather	weather.py	/^    def get_weather(self, start=0, days=5):$/;"	kind:member	line:63
+requests	weather.py	/^import requests$/;"	kind:namespace	line:3
+settings.py	settings.py	1;"	kind:file	line:1
+suggest_map	weather.py	/^suggest_map = {$/;"	kind:variable	line:50
+weather.py	weather.py	1;"	kind:file	line:1
+weather_map	weather.py	/^weather_map = {$/;"	kind:variable	line:18
