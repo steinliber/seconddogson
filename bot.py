@@ -46,7 +46,8 @@ def weather(bot, update):
 
 def select_type(bot, update):
     type = update.callback_query.data
-    files = "".join([random.choice(string.letters) for i in xrange(8)])
+    files = "".join([random.choice(string.ascii_letters) for i in range(8)])
+    print(type, files)
     urllib.request.urlretrieve(files['file_path'], join('static', 'saved', type, files))
     bot.sendMessage(chat_id=update.message.chat_id, text='照片保存好了撒\U0001F60E')
 
