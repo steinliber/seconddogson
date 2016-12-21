@@ -26,7 +26,6 @@ def img(bot, update):
     groups.append(
 	       [InlineKeyboardButton(text='私房照', callback_data='personal'), InlineKeyboardButton(text='公共照', callback_data='public')]
     )
-    print groups
     # groups.append(
 	#        [InlineKeyboardButton(text='公共照', callback_data='public')]
     # )
@@ -36,8 +35,7 @@ def img(bot, update):
     files = bot.get_file(file_id)
     file_name = files['file_path'].split('/')[-1]
     urllib.request.urlretrieve(files['file_path'], join('static', 'saved', file_name))
-    update.message.reply_text(u'欢饮欢迎')
-    bot.sendMessage(chat_id=update.message.chat_id, text='choose type', reply_markup=InlineKeyboardMarkup(groups))
+    bot.sendMessage(chat_id=update.message.chat_id, text='请选择要保存的分类', reply_markup=InlineKeyboardMarkup(groups))
 
 def start(bot, update):
     update.message.reply_text(u'欢饮欢迎')
