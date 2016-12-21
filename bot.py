@@ -3,9 +3,11 @@ import logging
 import random
 from os import listdir
 from os.path import isfile, join
+import urllib.request
 
 from chat import deepThought
 from settings import BOT_TOKEN
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 from weather import WeatherAPI
 
@@ -16,9 +18,25 @@ def echo(bot, update):
     if return_msg == '全然不懂你在说什么':
         catfiles = [join('static/cat', f) for f in listdir('static/cat')]
         picture = random.choice(catfiles)
-        bot.sendPhoto(chat_id=update.message.chat_id, photo=open(picture, 'rb'))
+        bot.sendPhoto(chat_id=update.message.chat_id, photo=open(picture, 'rb'),)
     bot.sendMessage(chat_id=update.message.chat_id, text=return_msg)
 
+def img(bot, update):
+    groups = list()
+    groups.append(
+	[InlineKeyboardButton(text='私房照', callback_ata='personal']
+    )
+    groups.append(
+	[InlineKeyboardButton(text='公众照片', callbac_data='public']
+    )
+    pics = [(x.file_id, x.file_size) for x in update.message.photo]
+    max_pics = max(pic[1] for pic in pics)
+    file_id = [x for x in pics if x[1] == max_pics][0][0]
+    files = bot.get_file(file_id)
+    file_name = files['file_path'].split('/')[-1]
+    urllib.request.urlretrieve(files['file_path'], join('static', 'saved', file_name))
+    update.message.reply_text(u'欢饮欢迎')
+    bot.sendMessage(chat_id=update.message.chat_id, text='choose type', reply_markup=InlineKeyboardMarkup(groups))
 
 def start(bot, update):
     update.message.reply_text(u'欢饮欢迎')
@@ -32,11 +50,13 @@ def weather(bot, update):
 
 
 echo_handler = MessageHandler(Filters.text, echo)
+img_handler = MessageHandler(Filters.photo, img)
 
 updater = Updater(BOT_TOKEN)
 updater.dispatcher.add_handler(CommandHandler('weather', weather))
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(echo_handler)
+updater.dispatcher.add_handler(img_handler)
 
 updater.start_polling()
 updater.idle()
