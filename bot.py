@@ -24,10 +24,10 @@ def echo(bot, update):
 def img(bot, update):
     groups = list()
     groups.append(
-	[InlineKeyboardButton(text='私房照', callback_ata='personal']
+	[InlineKeyboardButton(text='私房照', callback_data='personal']
     )
     groups.append(
-	[InlineKeyboardButton(text='公众照片', callbac_data='public']
+	[InlineKeyboardButton(text='公众照片', callback_data='public']
     )
     pics = [(x.file_id, x.file_size) for x in update.message.photo]
     max_pics = max(pic[1] for pic in pics)
