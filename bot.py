@@ -4,6 +4,7 @@ import random
 from os import listdir
 from os.path import isfile, join
 import urllib.request
+import string
 
 from chat import deepThought
 from settings import BOT_TOKEN
@@ -26,15 +27,11 @@ def img(bot, update):
     groups.append(
 	       [InlineKeyboardButton(text='私房照', callback_data='personal'), InlineKeyboardButton(text='公共照', callback_data='public')]
     )
-    # groups.append(
-	#        [InlineKeyboardButton(text='公共照', callback_data='public')]
-    # )
     pics = [(x.file_id, x.file_size) for x in update.message.photo]
     max_pics = max(pic[1] for pic in pics)
     file_id = [x for x in pics if x[1] == max_pics][0][0]
     files = bot.get_file(file_id)
     file_name = files['file_path'].split('/')[-1]
-    urllib.request.urlretrieve(files['file_path'], join('static', 'saved', file_name))
     bot.sendMessage(chat_id=update.message.chat_id, text='请选择要保存的分类', reply_markup=InlineKeyboardMarkup(groups))
 
 def start(bot, update):
@@ -49,7 +46,9 @@ def weather(bot, update):
 
 def select_type(bot, update):
     type = update.callback_query.data
-    print(type)
+    files = "".join([random.choice(string.letters) for i in xrange(8)])
+    urllib.request.urlretrieve(files['file_path'], join('static', 'saved', type, files))
+    bot.sendMessage(chat_id=update.message.chat_id, text='照片保存好了撒\U0001F60E')
 
 echo_handler = MessageHandler(Filters.text, echo)
 img_handler = MessageHandler(Filters.photo, img)
