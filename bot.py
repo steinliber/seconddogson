@@ -24,11 +24,12 @@ def echo(bot, update):
 def img(bot, update):
     groups = list()
     groups.append(
-	       [InlineKeyboardButton(text='私房照', callback_data='personal')]
+	       [InlineKeyboardButton(text='私房照', callback_data='personal'), InlineKeyboardButton(text='公共照', callback_data='public')]
     )
-    groups.append(
-	       [InlineKeyboardButton(text='公共照', callback_data='public')]
-    )
+    print groups
+    # groups.append(
+	#        [InlineKeyboardButton(text='公共照', callback_data='public')]
+    # )
     pics = [(x.file_id, x.file_size) for x in update.message.photo]
     max_pics = max(pic[1] for pic in pics)
     file_id = [x for x in pics if x[1] == max_pics][0][0]
