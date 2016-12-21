@@ -8,7 +8,7 @@ import urllib.request
 from chat import deepThought
 from settings import BOT_TOKEN
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
+from telegram.ext import CommandHandler, Filters, MessageHandler, Updater, CallbackQueryHandler
 from weather import WeatherAPI
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -47,6 +47,9 @@ def weather(bot, update):
     suggest_text = weather_api.get_suggestion()
     bot.sendMessage(chat_id=update.message.chat_id, text=suggest_text)
 
+def select_type(bot, update):
+    type = update.callback_query.data
+    print(type)
 
 echo_handler = MessageHandler(Filters.text, echo)
 img_handler = MessageHandler(Filters.photo, img)
@@ -56,6 +59,7 @@ updater.dispatcher.add_handler(CommandHandler('weather', weather))
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(echo_handler)
 updater.dispatcher.add_handler(img_handler)
+updater.dispatcher.add_handler(CallbackQueryHandler(select_type))
 
 updater.start_polling()
 updater.idle()
